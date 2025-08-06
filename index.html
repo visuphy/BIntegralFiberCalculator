@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B-Integral Calculator in Fibers</title>
+    
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Link to local and shared styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/footer.css">
+</head>
+<body>
+
+    <!-- This div will be populated by layout.js with the shared header content -->
+    <div id="header-placeholder"></div>
+
+    <!-- This H1 block contains the title and info specific to this page -->
+    <h1>
+      <!-- Wrapper for title and copyright -->
+      <div class="h1-title-group">
+        <span class="h1-title">B-Integral Calculator in Fibers</span>
+        <div class="h1-copyright">
+          © 2025 <a href="https://github.com/visuphy" target="_blank" title="Visit VisuPhy on GitHub">VisuPhy</a>
+        </div>
+      </div>
+      <!-- Container for the info links -->
+      <div class="h1-info">
+        <div class="info-item">
+          <span class="info-label">About and discussion</span>
+          <div class="info-content">
+            <a href="." target="_blank" title="About and Discussion">
+               <i class="fa-solid fa-file-invoice"></i>
+            </a>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Source</span>
+          <div class="info-content">
+            <a href="https://github.com/visuphy/BIntegralFiberCalculator" target="_blank" title="View Source on GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Original Author</span>
+          <div class="info-content">
+            <a href="https://github.com/Hussein-Tofaili" target="_blank">Hussein-Tofaili</a>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Other Contributors</span>
+          <div class="info-content">
+            <span style="color: #555;">none</span>
+          </div>
+        </div>
+      </div>
+    </h1>
+
+    <!-- Main content container, now holding the calculator -->
+    <div class="main-content">
+        <!-- Page description moved here -->
+        <p class="page-description">Calculates the cumulative nonlinear phase shift for a user-defined series of fiber sections.</p>
+
+        <section class="info-section">
+            <div class="collapsible-header" id="info-header">
+                <h2>How It Works</h2>
+                <span class="toggle-icon">►</span>
+            </div>
+            <div class="collapsible-content" id="info-content-wrapper">
+                <div class="info-content-inner">
+                    <div class="info-diagram">
+                        <svg width="100%" height="60" viewBox="0 0 300 60" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                                <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#007bff"></path>
+                                </marker>
+                            </defs>
+                            <line x1="10" y1="30" x2="290" y2="30" stroke="#007bff" stroke-width="2" marker-end="url(#arrow)"></line>
+                            <rect x="40" y="15" width="60" height="30" fill="#e9f5ff" stroke="#007bff" rx="3"></rect>
+                            <text x="70" y="35" text-anchor="middle" font-size="10">Fiber 1</text>
+                            <rect x="120" y="15" width="60" height="30" fill="#e9f5ff" stroke="#007bff" rx="3"></rect>
+                            <text x="150" y="35" text-anchor="middle" font-size="10">Fiber 2</text>
+                            <rect x="200" y="15" width="60" height="30" fill="#e9f5ff" stroke="#007bff" rx="3"></rect>
+                            <text x="230" y="35" text-anchor="middle" font-size="10">...</text>
+                        </svg>
+                    </div>
+                    <div class="info-formulas">
+                        <p>The total B-Integral is the sum of the B-Integrals of each individual fiber section:</p>
+                        <p><strong>B_total = Σ B_i</strong></p>
+                        <p>For each section, the calculation is:</p>
+                        <p><code>B = (2π / λ) * n₂ * (P_peak_in / A_eff) * L_eff</code></p>
+                        <ul>
+                            <li><strong>Peak Power:</strong> <code>P_peak = P_avg / (T_pulse * f_rep)</code></li>
+                            <li><strong>Effective Area:</strong> <code>A_eff = π * (MFD / 2)²</code></li>
+                            <li><strong>Effective Length (handles gain):</strong><br><code>L_eff = L * (G - 1) / ln(G)</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <main class="calculator">
+            <div class="input-section">
+                <h2>System Parameters</h2>
+                <div class="form-grid system-params">
+                    <div class="input-group">
+                        <label for="n2_value">Nonlinear Index n₂ (m²/W)</label>
+                        <input type="number" id="n2_value" value="2.7e-20" step="1e-22">
+                    </div>
+                </div>
+            </div>
+
+            <div id="fiber-sections-container">
+                <div class="fiber-section" data-section-id="1">
+                    <div class="section-header">
+                        <h3>Fiber #1</h3>
+                    </div>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="wavelength_1">Wavelength (nm)</label>
+                            <input type="number" id="wavelength_1" class="wavelength" value="1064">
+                        </div>
+                        <div class="input-group">
+                            <label for="pulseDuration_1">Pulse Duration (ps)</label>
+                            <input type="number" id="pulseDuration_1" class="pulseDuration" value="10">
+                        </div>
+                        <div class="input-group">
+                            <label for="prr_1">PRR (MHz)</label>
+                            <input type="number" id="prr_1" class="prr" value="20">
+                        </div>
+                        <div class="input-group">
+                            <label for="len_1">Fiber Length (m)</label>
+                            <input type="number" id="len_1" class="length" value="1.0">
+                        </div>
+                        <div class="input-group">
+                            <label for="mfd_1">MFD (µm)</label>
+                            <input type="number" id="mfd_1" class="mfd" value="6.0">
+                        </div>
+                        <div class="input-group">
+                            <label for="avgPowerIn_1">Avg. Input Power (W)</label>
+                            <input type="number" id="avgPowerIn_1" class="avgPowerIn" value="1.0">
+                        </div>
+                         <div class="input-group">
+                            <label for="gain_1">
+                                Numerical Gain 
+                                <span class="info-icon" title="Gain = 1 for passive fibers (no amplification or loss). Gain > 1 for amplification. Gain < 1 for loss.">ⓘ</span>
+                            </label>
+                            <input type="number" id="gain_1" class="gain" value="1.0">
+                        </div>
+                        <div class="input-group">
+                            <label for="avgPowerOut_1">Avg. Output Power (W)</label>
+                            <input type="number" id="avgPowerOut_1" class="avgPowerOut" value="1.0" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="button-container">
+                 <button id="addFiberBtn">+ Add Fiber Section</button>
+                 <button id="calculateBtn" class="primary">Calculate B-Integral</button>
+            </div>
+        </main>
+
+        <section id="results" class="results-section hidden">
+            <h2>Results</h2>
+            <div id="results-list"></div>
+            <div class="result-total">
+                <span>Total B-Integral:</span>
+                <strong id="btotal_result">0.000 rad</strong>
+            </div>
+        </section>
+    </div>
+
+    <!-- This div will be populated by layout.js with the shared footer content -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="/layout.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>

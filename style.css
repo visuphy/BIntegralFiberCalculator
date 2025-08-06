@@ -1,0 +1,372 @@
+/* --- CSS Variables from Calculator --- */
+:root {
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #212529;
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --secondary-color: #6c757d;
+    --secondary-hover: #5a6268;
+    --danger-color: #dc3545;
+    --danger-hover: #c82333;
+    --border-color: #dee2e6;
+    --info-bg: #eef1f5;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    --border-radius: 8px;
+}
+
+/* --- General Body Styling (from Ribbon) --- */
+body {
+    font-family: 'Inter', sans-serif, system-ui;
+    background-color: var(--bg-color); /* Use theme background */
+    color: var(--text-color);
+    margin: 0;
+    font-size: 15px;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* --- Styles for the H1 Title Block (MODIFIED) --- */
+h1 {
+    /* Box model styles to match other cards */
+    max-width: 900px;
+    margin: 2rem auto 1rem auto; /* Center the box and add margin */
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+
+    /* Flexbox layout for internal content */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    /* Font styles */
+    color: var(--text-color);
+    font-size: 1.7em;
+}
+
+/* Wrapper for title and copyright notice */
+.h1-title-group {
+    flex-shrink: 0;
+}
+
+/* Main title text */
+.h1-title {
+     display: block;
+     color: #343a40;
+}
+
+/* Copyright notice below title */
+.h1-copyright {
+    font-size: 0.5em;
+    font-weight: normal;
+    color: #555;
+    margin-top: 5px;
+}
+.h1-copyright a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+.h1-copyright a:hover {
+    text-decoration: underline;
+}
+
+/* Container for info items on the right */
+.h1-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    font-size: 0.4em; /* Font size reduced */
+    text-align: center;
+    align-items: flex-start;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-label {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
+}
+
+.info-content a, .info-content span {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.1em;
+}
+.info-content a:hover {
+    color: var(--primary-hover);
+}
+.h1-info a i {
+    font-size: 2em;
+    transition: transform 0.2s ease-in-out;
+}
+.h1-info a:hover i {
+    transform: scale(1.1);
+}
+
+/* --- Main content container --- */
+.main-content {
+    max-width: 900px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin: 0 auto 2rem auto; /* Adjusted top margin */
+}
+
+/* Page description below title ribbon */
+.page-description {
+    text-align: center;
+    font-size: 1.05em;
+    color: var(--secondary-color);
+    margin: 0 auto 2rem auto;
+}
+
+
+/* --- Styles for Calculator components --- */
+
+/* Info Section & Collapsible Styles */
+.info-section {
+    background-color: var(--info-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    padding: 0 1.5rem;
+}
+
+.collapsible-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 1rem 0;
+}
+
+h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+}
+
+.collapsible-header h2 {
+     margin: 0;
+}
+
+.toggle-icon {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    transition: transform 0.3s ease-in-out;
+}
+.toggle-icon.expanded {
+    transform: rotate(90deg);
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+}
+
+.info-content-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.info-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-formulas p { margin: 0.5rem 0; }
+.info-formulas ul { margin-top: 0.5rem; padding-left: 1.5rem; }
+.info-formulas li { margin-bottom: 0.25rem; }
+.info-formulas code {
+    background-color: #d6dbdf;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Main Calculator Styles */
+.input-section h2 {
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+.system-params {
+     grid-template-columns: minmax(150px, 1fr);
+     max-width: 250px;
+}
+
+.fiber-section {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: #fdfdff;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.section-header h3 {
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.info-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 11px;
+    line-height: 16px;
+    font-style: normal;
+    font-weight: bold;
+    cursor: help;
+    margin-left: 8px;
+    user-select: none;
+}
+
+input[type="number"] {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+input[readonly] {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.button-container {
+    text-align: center;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.9rem 2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover { background-color: var(--secondary-hover); }
+button.primary { background-color: var(--primary-color); }
+button.primary:hover { background-color: var(--primary-hover); }
+button.remove-btn {
+    background-color: var(--danger-color);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+button.remove-btn:hover { background-color: var(--danger-hover); }
+
+/* Results Section */
+.results-section {
+    background-color: #e9f5ff;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #bde0fe;
+}
+.results-section h2 {
+    margin-top: 0;
+}
+
+#results-list .result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    font-size: 1.1rem;
+}
+
+#results-list .result-item + .result-item {
+    border-top: 1px dashed var(--border-color);
+}
+
+.result-total {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--primary-color);
+    font-weight: bold;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hidden { display: none; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .info-content-inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .info-diagram {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
